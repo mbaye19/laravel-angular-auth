@@ -11,6 +11,7 @@ import { RequestResetComponent } from './components/password/request-reset/reque
 import { ResponseResetComponent } from './components/password/response-reset/response-reset.component';
 import { HttpClientModule } from '@angular/common/http'
 import { JarwisService } from './Services/jarwis.service';
+import { TokenService } from './Services/token.service';
 
 const appRoutes: Routes = [
   {
@@ -52,7 +53,7 @@ const appRoutes: Routes = [
     FormsModule,
     HttpClientModule
   ],
-  providers: [JarwisService],
+  providers: [JarwisService, TokenService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

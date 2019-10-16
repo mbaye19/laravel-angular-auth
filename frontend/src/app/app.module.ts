@@ -13,27 +13,34 @@ import { HttpClientModule } from '@angular/common/http'
 import { JarwisService } from './Services/jarwis.service';
 import { TokenService } from './Services/token.service';
 import { AuthService } from './Services/auth.service';
+import { AfterLoginService } from './Services/after-login.service';
+import { BeforeLoginService } from './Services/before-login.service';
 
 const appRoutes: Routes = [
   {
     path: 'login',
-    component: LoginComponent
+    component: LoginComponent,
+    canActivate: [BeforeLoginService]
   },
   {
     path: 'signup',
-    component: SignupComponent
+    component: SignupComponent,
+    canActivate: [BeforeLoginService]
   },
   {
     path: 'profile',
-    component: ProfileComponent
+    component: ProfileComponent,
+    canActivate: [AfterLoginService]
   },
   {
     path: 'request-password-reset',
-    component: RequestResetComponent
+    component: RequestResetComponent,
+    canActivate: [AfterLoginService]
   },
   {
     path: 'response-password-reset',
-    component: ResponseResetComponent
+    component: ResponseResetComponent,
+    canActivate: [AfterLoginService]
   }
 ]
 
@@ -54,7 +61,13 @@ const appRoutes: Routes = [
     FormsModule,
     HttpClientModule
   ],
-  providers: [JarwisService, TokenService, AuthService],
+  providers: [
+    JarwisService,
+    TokenService,
+    AuthService,
+    AfterLoginService,
+    BeforeLoginService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
